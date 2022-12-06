@@ -6,7 +6,8 @@ import { Configuration } from '@/types/typescript-axios/configuration';
 
 import axios from 'axios';
 
-const { API_URL } = process.env;
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+console.log('API_URL', API_URL)
 
 const config = new Configuration({
   basePath: API_URL,

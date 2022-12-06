@@ -27,49 +27,10 @@ paths:
                     properties:
                       name:
                         type: string
+              example:
+                name: Jessica Smith
       operationId: get-user_id
       description: ''
-      tags:
-        - user
-    post:
-      summary: ユーザー更新
-      operationId: update-user
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  user:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    email:
-                      type: string
-          application/xml:
-            schema:
-              type: object
-              properties:
-                user:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-        description: ''
       tags:
         - user
 components:

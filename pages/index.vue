@@ -1,5 +1,7 @@
 <template>
-  <Tutorial/>
+  <div>
+    <button @click="getUserRequest()" >Button</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,6 +14,8 @@ export default Vue.extend({
     async getUserRequest() {
       const userId = 'xxx'
       const response = await userApi.getUserId(userId)
+      console.log('response', response)
+      console.log('response.data.user', response.data.user)
     }
   }
 })

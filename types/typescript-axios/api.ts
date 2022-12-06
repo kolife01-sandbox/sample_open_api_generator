@@ -47,38 +47,6 @@ export interface GetUserId200ResponseUser {
      */
     'name'?: string;
 }
-/**
- * 
- * @export
- * @interface UpdateUserRequest
- */
-export interface UpdateUserRequest {
-    /**
-     * 
-     * @type {UpdateUserRequestUser}
-     * @memberof UpdateUserRequest
-     */
-    'user'?: UpdateUserRequestUser;
-}
-/**
- * 
- * @export
- * @interface UpdateUserRequestUser
- */
-export interface UpdateUserRequestUser {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUserRequestUser
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateUserRequestUser
-     */
-    'email'?: string;
-}
 
 /**
  * UserApi - axios parameter creator
@@ -120,44 +88,6 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary ユーザー更新
-         * @param {string} userId 
-         * @param {UpdateUserRequest} [updateUserRequest] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateUser: async (userId: string, updateUserRequest?: UpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('updateUser', 'userId', userId)
-            const localVarPath = `/users/{user_id}`
-                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateUserRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -177,18 +107,6 @@ export const UserApiFp = function(configuration?: Configuration) {
          */
         async getUserId(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetUserId200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserId(userId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @summary ユーザー更新
-         * @param {string} userId 
-         * @param {UpdateUserRequest} [updateUserRequest] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateUser(userId: string, updateUserRequest?: UpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetUserId200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(userId, updateUserRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -211,17 +129,6 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         getUserId(userId: string, options?: any): AxiosPromise<GetUserId200Response> {
             return localVarFp.getUserId(userId, options).then((request) => request(axios, basePath));
         },
-        /**
-         * 
-         * @summary ユーザー更新
-         * @param {string} userId 
-         * @param {UpdateUserRequest} [updateUserRequest] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateUser(userId: string, updateUserRequest?: UpdateUserRequest, options?: any): AxiosPromise<GetUserId200Response> {
-            return localVarFp.updateUser(userId, updateUserRequest, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -242,19 +149,6 @@ export class UserApi extends BaseAPI {
      */
     public getUserId(userId: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).getUserId(userId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary ユーザー更新
-     * @param {string} userId 
-     * @param {UpdateUserRequest} [updateUserRequest] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApi
-     */
-    public updateUser(userId: string, updateUserRequest?: UpdateUserRequest, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).updateUser(userId, updateUserRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
